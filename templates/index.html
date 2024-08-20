@@ -1,0 +1,21 @@
+<html>
+        <head>
+            <title>Table with Buttons</title>
+            <link rel="stylesheet" href="static/styles/style.css">
+            <script src="static/scripts/script.js"></script>
+        </head>
+        <body>
+            
+            <table>
+                {% for row_index, row in data|enumerate %}
+                <tr>
+                    {% for col_index, cell in row|enumerate %}
+                    <td class="spaces" id={{row_index+col_index}}>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            
+            
+        </body>
+</html>
