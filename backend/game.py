@@ -12,7 +12,7 @@ class game:
         return self.playfield.move(sign,place_number)
     
     def ai_move(self,ai_sign, player_sign):
-        return algorithm.minimax(self.playfield,True,ai_sign,player_sign)
+        return self.playfield.move(ai_sign,algorithm.minimax(self.playfield,True,ai_sign,player_sign))
     
     def get_board(self):
         return np.array(self.playfield.array).flatten()

@@ -53,6 +53,7 @@ def get_board():
 
     # Roep de Python-functie aan met de ontvangen parameters
     result = game.get_board().tolist()
+    print(result)
     return jsonify({"result" :result})
     
 if __name__ == "__main__":

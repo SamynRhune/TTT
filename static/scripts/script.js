@@ -5,33 +5,32 @@ const PLAYER_SIGN = "O"
 let spaces = document.getElementsByClassName("spaces");
 
 for(let i = 0; i < spaces.length;  i++){
-    spaces[i].addEventListener("click",()=>move(i,PLAYER_SIGN))
+    spaces[i].style.color = "white";
+    spaces[i].addEventListener("click",()=>move(i,PLAYER_SIGN,AI_SIGN))
     spaces[i].addEventListener('contextmenu', function(ev) {
         ev.preventDefault();
         move(i,AI_SIGN)
         return false;
     }, false);
+    
 
 }
 
 const update_board = () => {
     console.log("update board")
 
-    get_board().then(board =>
-        console.log(board)
-    )
-    
-    /* .then(board => {
-        console.log("Board");
-        console.log(board);
-
-        // Assuming spaces is an array of elements that correspond to board positions
-        for (let i = 0; i < board.length; i++) {
-            spaces[i].innerText = board[i];
+    get_board()
+        .then(board =>{
+            console.log(board);
+            for (let i = 0; i < board.length; i++) {
+                spaces[i].innerText = board[i];
+                if(spaces[i] != 0 ){
+                    spaces[i].style.color = "black"
+                }
+            }
         }
-    }).catch(error => {
-        console.error('Failed to update board:', error);
-    }); */
+        ).catch(console.log("board_error"))
+    ;
 }
 
 const move = (index,player_sign, ai_sign) => {
@@ -57,6 +56,7 @@ const move = (index,player_sign, ai_sign) => {
             //spaces[index].innerText = player_sign;
             update_board()
             ai_move(ai_sign,player_sign)
+            
         } else {
             console.log("Move illegal");
         }}) 
@@ -80,8 +80,13 @@ const ai_move = (ai_sign,player_sign) => {
     })
     .then(response => response.json())
     .then(data => {
-        index_move = data.result; 
-        spaces[index_move].innerText = ai_sign;
+        valid_move = data.result;  
+        
+        if(valid_move){
+            update_board()
+        }else{
+            console.log("invalid move from ai")
+        }
         }) 
     .catch(error => console.error('Error:', error));
 }
