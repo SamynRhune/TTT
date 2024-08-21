@@ -20,6 +20,8 @@ class game:
     def get_board_2d(self):
         return self.playfield.array
     
+    def reset_board(self):
+        return self.playfield.reset()
 
     def play():
         player_sign = "O"

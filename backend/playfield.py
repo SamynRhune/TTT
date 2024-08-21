@@ -12,6 +12,7 @@ class playfield:
         self.array = [[0,0,0]
                       ,[0,0,0]
                       ,[0,0,0]]
+        return True
     
     def copy(self):
         return playfield(self.array)

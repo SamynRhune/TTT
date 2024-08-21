@@ -55,6 +55,14 @@ def get_board():
     result = game.get_board().tolist()
     print(result)
     return jsonify({"result" :result})
+
+@app.route('/reset_board', methods=['POST'])
+def reset_board():
+
+    # Roep de Python-functie aan met de ontvangen parameters
+    result = game.reset_board()
+    print(result)
+    return jsonify({"result" :result})
     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)

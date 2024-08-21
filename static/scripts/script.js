@@ -3,6 +3,7 @@ const setup = () => {
 const AI_SIGN = "X"
 const PLAYER_SIGN = "O"
 let spaces = document.getElementsByClassName("spaces");
+let reset_button = document.getElementById("reset")
 
 for(let i = 0; i < spaces.length;  i++){
     spaces[i].style.color = "white";
@@ -12,9 +13,9 @@ for(let i = 0; i < spaces.length;  i++){
         move(i,AI_SIGN)
         return false;
     }, false);
-    
-
 }
+reset_button.addEventListener("click",()=> reset_board())
+
 
 const update_board = () => {
     console.log("update board")
@@ -104,6 +105,28 @@ const get_board = () => {
     .then(data => {
         const board = data.result;
         return board
+        }) 
+    .catch(error => {console.error('Error:', error)
+        throw error;
+    });
+}
+
+const reset_board = () => {
+    params = {}
+    return fetch('http://127.0.0.1:80/reset_board', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+    })
+    .then(response => response.json())
+    .then(data => {
+        reset_succesful = data.result
+        if(reset_succesful){
+            update_board();
+        }
+        
         }) 
     .catch(error => {console.error('Error:', error)
         throw error;
