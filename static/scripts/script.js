@@ -25,7 +25,7 @@ const update_board = () => {
             console.log(board);
             for (let i = 0; i < board.length; i++) {
                 spaces[i].innerText = board[i];
-                if(spaces[i] != 0 ){
+                if(spaces[i].innerText != 0 ){
                     spaces[i].style.color = "black"
                 }
             }
@@ -123,7 +123,11 @@ const reset_board = () => {
     .then(response => response.json())
     .then(data => {
         reset_succesful = data.result
+
         if(reset_succesful){
+            for(let i = 0; i < spaces.length;  i++){
+                spaces[i].style.color = "white";
+            }
             update_board();
         }
         

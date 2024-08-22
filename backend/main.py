@@ -1,5 +1,5 @@
-from backend.playfield import playfield
-from backend.algorithm import minimax
+from playfield import playfield
+from algorithm import minimax
 
 playfield = playfield()
 
