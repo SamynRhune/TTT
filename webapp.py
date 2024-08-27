@@ -63,6 +63,15 @@ def reset_board():
     result = game.reset_board()
     print(result)
     return jsonify({"result" :result})
+
+@app.route('/check_for_end', methods=['POST'])
+def check_for_end():
+    data = request.get_json()  # Ontvang JSON-data van het verzoek
+    player_sign = data.get('player_sign')
+    # Roep de Python-functie aan met de ontvangen parameters
+    result = game.check_for_end(player_sign)
+    print(result)
+    return jsonify({"result" :result})
     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)

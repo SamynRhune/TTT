@@ -22,6 +22,9 @@ class game:
     
     def reset_board(self):
         return self.playfield.reset()
+    
+    def check_for_end(self,player_sign):
+        return self.playfield.check_for_end(player_sign)
 
     def play():
         player_sign = "O"
